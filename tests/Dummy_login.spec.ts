@@ -3,7 +3,7 @@ const fs1=require('fs');
 test.beforeEach(async({page})=>{
     await page.goto("https://practicetestautomation.com/practice-test-login/");
 })
-test("Dummy login with correct credentials",async({page,context})=>{
+test("Dummy login with correct credentials",{tag:'@login'},async({page,context})=>{
     
     await page.locator("div #username").pressSequentially("student");
     // await page.locator("div #username").press('Backspace');
@@ -21,7 +21,7 @@ test("Dummy login with correct credentials",async({page,context})=>{
     await expect(msg).toBe(expected_msg);
 
 })
-test("Dummy login with incorrect credentials",async({page})=>{
+test("Dummy login with incorrect credentials",{tag:'@login'},async({page})=>{
     await page.goto("https://practicetestautomation.com/practice-test-login/");
     await page.locator("div #username").fill("Varun");
     await page.locator("div #password").fill("12345678");
@@ -32,7 +32,7 @@ test("Dummy login with incorrect credentials",async({page})=>{
 
 })
 
-test("Dummy login with correct username and incorrect password",async({page})=>{
+test("Dummy login with correct username and incorrect password",{tag:'@login'},async({page})=>{
     await page.locator("div #username").fill("student");
     await page.locator("div #password").fill("12345678");
     await page.locator("button[id='submit']").click();
@@ -41,7 +41,7 @@ test("Dummy login with correct username and incorrect password",async({page})=>{
     await expect(password_errormsg).toBe(displayed_msg);
 
 })
-test("alphanumeric values",async({page})=>{
+test("alphanumeric values",{tag:'@login'},async({page})=>{
     await page.locator("div #username").fill("s_@tud123,@./");
     await page.locator("div #password").fill("794yuefhi7y");
     await page.locator("button[id='submit']").click();
